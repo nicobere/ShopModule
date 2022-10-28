@@ -25,7 +25,7 @@
 import ShoppingCartList from "@/components/ShoppingCartComponents/ShoppingCartList.vue"
 
 export default {
-  name: 'ShoppingCartView',
+  name: 'ShoppingCartView', 
 
   props: {
     shoppingCartItems: []
