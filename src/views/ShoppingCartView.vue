@@ -11,7 +11,7 @@
       <p class="d-inline-block">Return Product List</p>
     </div>
 
-    <!-- Shopping Cart Header -->
+    <!-- Shopping Cart Header --> 
     <div class="shoppingCartViewHeader mt-4">
       <h1>Shopping Cart</h1>
     </div>
