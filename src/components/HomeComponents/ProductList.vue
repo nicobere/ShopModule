@@ -25,15 +25,6 @@
 
     </div>
 
-    <!-- Current Category Filter Text -->
-    <div class="mt-3">
-      <div class="currentCategoryFilterHeader" v-show="currentCategoryFilter != ''">
-        <i class="fas fa-filter text-primary"></i>
-        <h5 class="d-inline-block">Filter:</h5>
-        <span class="currentCategoryFilterText alert alert-primary py-1 px-2">{{currentCategoryFilter}}</span>
-      </div>
-    </div>
-    
     <!-- Product Item Component-->
     <div id="productList" class="mt-5 d-block d-sm-flex flex-wrap">
       <ProductListItem v-for="(item, index) in productList" :key="index" :productItem="item" class="mb-4"></ProductListItem>
@@ -47,9 +38,9 @@
 
 <script>
 import ProductListItem from "@/components/HomeComponents/ProductListItem.vue";
-import openModalAddProduct from "./modalAddProduct.vue"
+import openModalAddProduct from "./modalAddProduct.vue";
 import axios from "axios";
-import "jquery"
+import "jquery";
 
 export default {
   name: "ProductList",
@@ -59,16 +50,14 @@ export default {
     openModalAddProduct,
   },
 
-  props: {},
-
   data() {
     return {
-      productList: [], // Getted List with Product Items
-      
-      categoryList: [], // Getted List with all Categories
+      productList: [],
+
+      categoryList: [],
       currentCategoryFilter: "",
 
-      shoppingCartList: [], // Local Shopping Cart List
+      shoppingCartList: [],
     };
   },
 
@@ -80,6 +69,10 @@ export default {
         .catch((err) => console.log(err));
     },
 
+    addProduct(item) {
+      this.productList.push(item);
+    },
+
     // Get Product Categories
     getCategories() {
       axios.get("https://fakestoreapi.com/products/categories")
@@ -87,18 +80,14 @@ export default {
         .catch((err) => console.log(err));
     },
 
-    // Get Filtered Product List by Category
     selectCategory(event) {
-      this.currentCategoryFilter = event.target.value
-
       if(event.target.value != "all categories") {
         axios.get("https://fakestoreapi.com/products/category/" + event.target.value)
         .then(res => { this.productList = res.data; })
         .catch(err => console.log(err))
       }
-      else { // Else for "All Categories"
+      else {
         this.getProducts();
-        this.currentCategoryFilter = ""; // Reset Filter Text
       }
     },
 
@@ -108,7 +97,7 @@ export default {
     },
 
     // Remove Item from Cart by ID
-    removeItemFroMShoppingCart(productItem) {
+    removeItemFromShoppingCart(productItem) {
       if(this.shoppingCartList.length > 0) {
         this.shoppingCartList.splice(this.shoppingCartList.findIndex((obj) => obj.id === productItem.id), 1);
       }
@@ -118,7 +107,7 @@ export default {
       axios.delete("https://fakestoreapi.com/products/" + productItem.id, {method:"DELETE"})
       .then(res => {
         this.productList.splice(this.productList.findIndex((obj) => obj.id === productItem.id), 1);
-      })
+        })
       .catch(err => console.log(err))
     },
 
@@ -180,7 +169,8 @@ section {
   margin-right: 13px;
 }
 
-.shoppingCartBtnResponsive {  /* Responsive View of ShoppingCart*/
+.shoppingCartBtnResponsive {
+  /* Responsive View of ShoppingCart*/
   margin-left: 0;
 }
 
@@ -200,7 +190,8 @@ section {
 }
 
 /* Responsive */
-@media (min-width: 576px) { /* 576px */
+@media (min-width: 576px) {
+  /* 576px */
   .selectCategoryInput {
     width: 49%;
   }
@@ -214,7 +205,8 @@ section {
   }
 }
 
-@media (min-width: 768px) { /* 768px */
+@media (min-width: 768px) {
+  /* 768px */
   .selectCategoryInput {
     width: 30%;
   }
@@ -224,13 +216,15 @@ section {
   }
 }
 
-@media (min-width: 992px) { /* 992px */
+@media (min-width: 992px) {
+  /* 992px */
   .selectCategoryInput {
     width: 25%;
   }
 }
 
-@media (min-width: 1400px) { /* 1400px */
+@media (min-width: 1400px) {
+  /* 1400px */
   .selectCategoryInput {
     width: 15%;
   }

@@ -12,7 +12,8 @@
       <!-- Item Image & Item Title -->
       <div class="position-relative d-flex flex-wrap align-items-center h-100 justify-content-center">
         <figure class="my-3">
-          <img draggable="false" :src="productItem.image" :alt="productItem.image" />
+          <img :src="productItem.image" v-if="productItem.image != ''"/> 
+          <img :src="'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ='" style="max-width: 45%;" v-else /> 
         </figure>
         <h1 class="productItemTitle">{{productItem.title}}</h1>
       </div>
@@ -39,7 +40,7 @@
           <span>Add</span>
           <i class="fas fa-shopping-cart"></i>
         </div>
-        <div class="itemToCart btn btn-sm btn-outline-danger d-flex align-items-center" v-else @click="removeItemFroMShoppingCart(productItem)">
+        <div class="itemToCart btn btn-sm btn-outline-danger d-flex align-items-center" v-else @click="removeItemFromShoppingCart(productItem)">
           <span>Remove</span>
           <i class="fas fa-minus"></i>
         </div>
@@ -78,8 +79,8 @@ export default {
       this.isInShoppingCart = true;
     },
     // Call Parent Function RemoveFromCart
-    removeItemFroMShoppingCart(productItem) {
-      this.$parent.removeItemFroMShoppingCart(productItem);
+    removeItemFromShoppingCart(productItem) {
+      this.$parent.removeItemFromShoppingCart(productItem);
       this.isInShoppingCart = false;
     },
   },
@@ -90,6 +91,7 @@ export default {
 </script>
 
 <style scoped>
+
 /*  Product Item  */
 .productItem {
   width: 100%;
@@ -98,13 +100,14 @@ export default {
   padding: 10px;
   border-radius: 10px;
   transition: all 0.1s;
-  /* margin: 0 auto; */
+  border: 2px solid white;
   position: relative;
 }
 
 .productItem:hover {
-  transform: scale(1.04);
+  transform: scale(1.03);
   cursor: pointer;
+  border: 2px solid var(--mainColor);
 }
 
 .productItem .itemPrice {

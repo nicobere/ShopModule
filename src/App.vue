@@ -5,6 +5,10 @@
 </template>
 
 <style>
+:root {
+  --mainColor: #0d6efd;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -16,6 +20,10 @@ body {
 .wrapper {
   width: 90%;
   margin: 0 auto;
+}
+
+.btn, select {
+  border-radius: 0 !important;
 }
 
 /* General */

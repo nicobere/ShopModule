@@ -9,7 +9,7 @@
     <!-- Total Price -->
     <div class="shoppingCartTotalPrice d-sm-flex d-block justify-content-end" v-if="shoppingCartItems.length > 0">
       <h1>Total: {{totalPrice}}€</h1>
-      <div class="buyItemsBtn d-block btn btn-lg btn-success align-self-center">Buy</div>
+      <div class="buyItemsBtn d-block btn btn-lg btn-outline-success align-self-center">Purchase</div>
     </div>
   </section>
 </template>
